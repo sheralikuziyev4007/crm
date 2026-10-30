@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>CRM mini — управление клиентами</title>
+    <meta
+      name="description"
+      content="Небольшая CRM для учёта клиентов: список с поиском и сортировкой, канбан-доска, статистика по статусам, светлая и тёмная тема."
+    />
+    <meta name="theme-color" content="#eef1f8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#090c1c" media="(prefers-color-scheme: dark)" />
+    <meta property="og:title" content="CRM mini — управление клиентами" />
+    <meta property="og:description" content="Список клиентов, канбан-доска и статистика. React + TypeScript." />
+    <meta property="og:type" content="website" />
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("crm-mini-theme");
+          var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+          document.documentElement.classList.toggle("dark", dark);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

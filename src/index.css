@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Палитра: значения — RGB-каналы, чтобы работали модификаторы прозрачности (bg-brand-700/25) */
+:root {
+  color-scheme: light;
+  --canvas: 238 241 248;
+  --surface: 255 255 255;
+
+  --stone-50: 246 247 251;
+  --stone-100: 238 240 247;
+  --stone-200: 225 228 239;
+  --stone-300: 203 208 225;
+  --stone-400: 98 106 140; /* ≥ 4.5:1 на белом, stone-50 и canvas (WCAG AA) */
+  --stone-500: 82 90 125;
+  --stone-600: 64 71 104;
+  --stone-700: 48 54 84;
+  --stone-800: 30 35 64;
+  --stone-900: 18 22 58;
+
+  --brand-50: 238 240 255;
+  --brand-300: 165 180 252;
+  --brand-400: 129 140 248;
+  --brand-600: 79 70 229;
+  --brand-700: 67 56 202;
+  --brand-800: 55 48 163;
+  --brand-ink: 67 56 202;
+
+  --glow-a: 99 102 241;
+  --glow-b: 168 85 247;
+
+  --lead-fg: 146 64 14;
+  --lead-bg: 254 243 199;
+  --lead-dot: 245 158 11;
+  --active-fg: 6 95 70;
+  --active-bg: 209 250 229;
+  --active-dot: 16 185 129;
+  --closed-fg: 51 65 85;
+  --closed-bg: 226 232 240;
+  --closed-dot: 100 116 139;
+}
+
+.dark {
+  color-scheme: dark;
+  --canvas: 9 12 28;
+  --surface: 20 24 49;
+
+  /* Шкала «перевёрнута»: светлые ступени становятся тёмными, тёмные — светлыми */
+  --stone-50: 26 31 58;
+  --stone-100: 32 38 74;
+  --stone-200: 42 49 87;
+  --stone-300: 58 66 112;
+  --stone-400: 152 161 208;
+  --stone-500: 169 177 220;
+  --stone-600: 192 198 232;
+  --stone-700: 213 217 242;
+  --stone-800: 230 233 250;
+  --stone-900: 243 244 255;
+
+  --brand-50: 30 33 82;
+  --brand-300: 90 98 200;
+  --brand-400: 129 140 248;
+  --brand-600: 99 102 241;
+  --brand-700: 91 99 245;
+  --brand-800: 75 82 224;
+  --brand-ink: 165 176 255;
+
+  --glow-a: 79 70 229;
+  --glow-b: 147 51 234;
+
+  --lead-fg: 252 211 77;
+  --lead-bg: 58 42 11;
+  --lead-dot: 251 191 36;
+  --active-fg: 110 231 183;
+  --active-bg: 11 58 45;
+  --active-dot: 52 211 153;
+  --closed-fg: 203 213 225;
+  --closed-bg: 39 48 74;
+  --closed-dot: 148 163 184;
+}
+
+body {
+  font-family: "Inter Variable", "Inter", system-ui, sans-serif;
+  color: rgb(var(--stone-900));
+  background-color: rgb(var(--canvas));
+  /* Два мягких световых пятна сверху — единственный «фон-декор», остальное спокойное */
+  background-image:
+    radial-gradient(52rem 26rem at 88% -8%, rgb(var(--glow-a) / 0.16), transparent 65%),
+    radial-gradient(38rem 24rem at -6% 4%, rgb(var(--glow-b) / 0.1), transparent 65%);
+  background-repeat: no-repeat;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+input,
+select,
+textarea {
+  color: inherit;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadein {
+  animation: fadein 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
