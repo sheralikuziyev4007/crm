@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom/vitest";
 import { afterAll, afterEach, beforeAll, beforeEach } from "vitest";
-import { cleanup } from "@testing-library/react";
+import { cleanup, configure } from "@testing-library/react";
 import { toast } from "sonner";
 import { server } from "@/mocks/server";
 import { db } from "@/mocks/db";
@@ -33,6 +33,10 @@ globalThis.ResizeObserver ??= ResizeObserverStub;
 Element.prototype.hasPointerCapture ??= () => false;
 Element.prototype.releasePointerCapture ??= () => {};
 Element.prototype.scrollIntoView ??= () => {};
+
+// ---- Timeouts that also hold on slower machines and CI runners ----
+// findBy*/waitFor wait up to 1s by default, which is too tight when the whole suite runs in parallel
+configure({ asyncUtilTimeout: 5000 });
 
 // ---- Fresh state for every test ----
 const initialFilters = useClientFiltersStore.getState();

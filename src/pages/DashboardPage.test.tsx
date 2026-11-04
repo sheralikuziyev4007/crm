@@ -1,11 +1,13 @@
 import { describe, it, expect } from "vitest";
 import { screen, within } from "@testing-library/react";
-import { setMockControls } from "@/mocks/controls";
+import { setBaseLatency, setMockControls } from "@/mocks/controls";
 import { db } from "@/mocks/db";
 import { renderApp } from "@/test/utils";
 
 describe("dashboard", () => {
   it("shows a skeleton, then the stats for every stage", async () => {
+    // A short delay keeps the skeleton on screen long enough to be seen, even on a slow machine
+    setBaseLatency(300);
     renderApp({ route: "/" });
     expect(await screen.findByText("Loading dashboard…")).toBeInTheDocument();
     expect(await screen.findByText("Total clients")).toBeInTheDocument();

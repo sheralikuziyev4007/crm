@@ -9,11 +9,15 @@ export default defineConfig({
     alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) },
   },
   test: {
-    environment: "jsdom",
+    // jsdom with Node-compatible abort signals for fetch/Request (see the file for details)
+    environment: "./src/test/jsdom-environment.ts",
     globals: true,
     setupFiles: ["./src/test/setup.ts"],
     include: ["src/**/*.test.{ts,tsx}"],
     css: false,
+    // Page tests render the whole app; give them room on slower machines
+    testTimeout: 20_000,
+    hookTimeout: 20_000,
     // Node's fetch needs an absolute URL; MSW answers it in tests
     env: { VITE_API_URL: "http://localhost:3000/api" },
   },

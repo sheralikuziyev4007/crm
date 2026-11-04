@@ -25,6 +25,8 @@ async function fillClientForm(user: ReturnType<typeof renderApp>["user"], values
 
 describe("loading, error and empty states", () => {
   it("shows a skeleton, then the first page of clients", async () => {
+    // A short delay keeps the skeleton on screen long enough to be seen, even on a slow machine
+    setBaseLatency(300);
     renderApp({ route: "/clients" });
     expect(await screen.findByText("Loading clients…")).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /add client/i })).toBeDisabled();
